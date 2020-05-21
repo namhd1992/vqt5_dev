@@ -40,7 +40,7 @@ import label_bvd from './images/label-bvd.png';
 import menu_float_left from './images/menu-float-left.png';
 import menu_float_right from './images/menu-float-right.png';
 import thumb_item_giaithuong from './images/thumb-item-giaithuong.png';
-
+import btn_dangnhap from './images/btn-dangnhap.png'
 
 import ReactResizeDetector from 'react-resize-detector'
 // import spin from './images/spin.gif';
@@ -713,7 +713,7 @@ class Lucky_Rotation extends React.Component {
 						</tr>
 						</table>
 					</div>
-					<div class="k-box-key">
+					{(isLogin)?(<div class="k-box-key">
 						<div class="d-flex justify-content-around">
 							<div class="mo-1"><a href="#" title="Mở 1 lần" data-toggle="modal" data-target="#hetchiakhoa"><img src={btn_mo_1lan} width="100" alt="Mở 1 lần"  /></a></div>
 						<div class="mo-td"><a href="#" title="Mở tự động" data-toggle="modal" data-target="#motudong"><img src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
@@ -723,7 +723,12 @@ class Lucky_Rotation extends React.Component {
 						</div>
 						<p class="font12 text-white text-center pt-1">Đang đăng nhập &lt;Huyenmy&gt; <a class="text-info" href="#" title="Thoát">Thoát</a></p>
 						
-					</div>
+					</div>):( <div class="k-box-key">            
+						<div class="d-flex justify-content-center pt-1">
+							<div class="them-chia-khoa"><a href="#" title="Đăng nhập"><img src={btn_dangnhap} width="150" alt="Đăng Nhập" /></a></div>
+						</div>            
+					</div>)}
+					
 				</div>
 				<div class="container-fluid">
 					<div class="float-left">
@@ -1103,27 +1108,22 @@ class Lucky_Rotation extends React.Component {
 			</div>
 
 			{/* <!-- The Modal Thông báo đăng nhập--> */}
-			{/* <div className="modal fade" id="myModal5">
-				<div className="modal-dialog">
-					<div className="modal-content popup-phanthuong">
-
-
-					<div className="modal-header border-bottom-0">
-						
-						<button type="button" className="close" data-dismiss="modal"><img src={close_icon} alt="Đóng" class="img-fluid"/></button>
+			<div class="modal fade" id="myModal5">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<div class="modal-header border-bottom-0 pb-0">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-
-					<div className="modal-body">
-					<h2 class="font-iCielPantonBlack text-brown-shadow text-uppercase text-center pb-0 w-75 mx-auto mt-n5">Thông Báo</h2>
-						<div className="mt-2 text-center">              
-							<h5 className="text-thele lead text-center py-3">Xin vui lòng đăng nhập!</h5>
-							<button type="button" className="btn btn-danger mx-auto text-center my-3" onClick={this.loginAction}>Đăng nhập</button>
-						</div>       
-					</div>
-
+						<div class="modal-body pt-0">
+							<h2 class="font-iCielPantonBlack text-brown-shadow text-uppercase text-center pb-0 w-75 mx-auto mt-n5">Thông Báo</h2>
+							<div className="mt-2 text-center">              
+								<h5 className="text-thele lead text-center py-3">Xin vui lòng đăng nhập!</h5>
+								<button type="button" className="btn btn-danger mx-auto text-center my-3" onClick={this.loginAction}>Đăng nhập</button>
+							</div>  
+						</div>
 					</div>
 				</div>
-			</div> */}
+			</div>
 
 			{/* <!-- The Modal Thông báo hết lượt => ok--> */}
 			<div class="modal fade" id="hetchiakhoa">
@@ -1203,33 +1203,28 @@ class Lucky_Rotation extends React.Component {
 			</div>
 
 			{/* <!-- The Modal báo lỗi--> */}
-			{/* <div className="modal fade" id="myModal11">
-				<div className="modal-dialog">
-					<div className="modal-content popup-phanthuong">
-					<div className="modal-header border-bottom-0">
-						<h2 class="font-iCielPantonBlack text-brown-shadow text-uppercase text-center pb-0 w-75 mx-auto mt-n5">Thông Báo</h2>
-						<button type="button" className="close" data-dismiss="modal"><img src={close_icon} alt="Đóng" class="img-fluid"/></button>
-					</div>
 
-					<div className="modal-body">
+			<div class="modal fade" id="myModal11">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<div class="modal-header border-bottom-0 pb-0">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
 						<div className="table-responsive mt-2">              
 							<h5 className="text-thele lead text-center">{message_error}</h5>
 						</div>       
 					</div>
-
-					</div>
 				</div>
-			</div> */}
+			</div>
 
-			{/* <div className="modal fade" id="myModal12">
-				<div className="modal-dialog">
-					<div className="modal-content popup-phanthuong">
-					<div className="modal-header border-bottom-0">
-						
-						<button type="button" className="close" data-dismiss="modal"><img src={close_icon} alt="Đóng" /></button>
+			{/* <!-- Hệ thống bảo trì--> */}
+			<div class="modal fade" id="myModal12">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<div class="modal-header border-bottom-0 pb-0">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-					<div className="modal-body">
-					<h2 class="font-iCielPantonBlack text-brown-shadow text-uppercase text-center pb-0 w-75 mx-auto mt-n5">Thông Báo</h2>
+						<h2 class="font-iCielPantonBlack text-brown-shadow text-uppercase text-center pb-0 w-75 mx-auto mt-n5">Thông Báo</h2>
 						<div className="mt-2 text-center">              
 							<h5 className="text-thele lead text-center">Thông báo bảo trì!</h5>
 							<h5 className="text-thele lead text-center">Hệ thống đang được nâng cấp để tối ưu. Vui lòng quay lại sau 10 phút.</h5>
@@ -1237,10 +1232,11 @@ class Lucky_Rotation extends React.Component {
 							<button type="button" className="btn btn-danger mx-auto text-center my-3" onClick={this.closeServerErr}>Xác nhận</button>
 						</div>       
 					</div>
-
-					</div>
 				</div>
-			</div> */}
+			</div>
+
+
+
 			<ReactResizeDetector handleWidth={true} handleHeight={true} onResize={this.onResize} />
 
 
