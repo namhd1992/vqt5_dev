@@ -129,7 +129,7 @@ class Lucky_Rotation extends React.Component {
 	componentDidMount(){
 		var user = JSON.parse(localStorage.getItem("user"));
 		if (user !== null) {
-			this.props.getRotationDetailDataUser(user.access_token, 119).then(()=>{
+			this.props.getRotationDetailDataUser(user.access_token, 1).then(()=>{
 				var data=this.props.dataRotationWithUser;
 				if(data!==undefined){
 					if(data.status==='01'){
@@ -146,7 +146,7 @@ class Lucky_Rotation extends React.Component {
 				
 			});
 		} else {
-			this.props.getRotationDetailData(119).then(()=>{
+			this.props.getRotationDetailData(1).then(()=>{
 				var data=this.props.dataRotation;
 				if(data!==undefined){
 					if(data.status==='01'){
@@ -521,7 +521,7 @@ class Lucky_Rotation extends React.Component {
 
 	getVinhDanh=(pageNumber)=>{
 		const {limit, luckySpin, type_item}=this.state;
-		this.props.getVinhDanh(119, 10, (pageNumber-1), type_item).then(()=>{
+		this.props.getVinhDanh(1, 10, (pageNumber-1), type_item).then(()=>{
 			var data=this.props.dataVinhDanh;
 			if(data!==undefined){
 				
@@ -700,10 +700,10 @@ class Lucky_Rotation extends React.Component {
 						<h2 class="text-center text-white font-weight-bold font-italic">Sắp tới giờ vàng</h2>
 						<table class="table table-borderless k-tbl-boxtime m-0 p-0" align="center">
 						<tr>
-							<td class="k-cell-timer-p1 text-white k-display-3 text-center font-weight-bold p-2 align-middle font-mijasultra">0</td>
-							<td class="k-cell-timer-p1 text-white k-display-3 text-center font-weight-bold p-2 align-middle font-mijasultra">0</td>
-							<td class="k-cell-timer-p1 text-white k-display-5 text-center font-weight-bold p-2 align-middle font-mijasultra">09</td>
-							<td class="k-cell-timer-p1 text-white k-display-3 text-center font-weight-bold p-2 align-middle font-mijasultra">0</td>
+							<td class="k-cell-timer-p1 text-white k-display-3 text-center font-weight-bold p-2 align-middle font-mijasultra">{day}</td>
+							<td class="k-cell-timer-p1 text-white k-display-3 text-center font-weight-bold p-2 align-middle font-mijasultra">{hour}</td>
+							<td class="k-cell-timer-p1 text-white k-display-5 text-center font-weight-bold p-2 align-middle font-mijasultra">{minute}</td>
+							<td class="k-cell-timer-p1 text-white k-display-3 text-center font-weight-bold p-2 align-middle font-mijasultra">{second}</td>
 						</tr>
 						<tr>
 							<td align="center" class="pt-0 k-h6 text-white font-italic pb-1">Ngày</td>
@@ -715,17 +715,17 @@ class Lucky_Rotation extends React.Component {
 					</div>
 					{(isLogin)?(<div class="k-box-key">
 						<div class="d-flex justify-content-around">
-							<div class="mo-1"><a href="#" title="Mở 1 lần" data-toggle="modal" data-target="#hetchiakhoa"><img src={btn_mo_1lan} width="100" alt="Mở 1 lần"  /></a></div>
-						<div class="mo-td"><a href="#" title="Mở tự động" data-toggle="modal" data-target="#motudong"><img src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
+							<div class="mo-1"><a title="Mở 1 lần" data-toggle="modal" data-target="#hetchiakhoa" onClick={this.btnStart}><img src={btn_mo_1lan} width="100" alt="Mở 1 lần"  /></a></div>
+						<div class="mo-td"><a title="Mở tự động" data-toggle="modal" data-target="#motudong" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
 						</div>
 						<div class="d-flex justify-content-center pt-1">
-							<div class="them-chia-khoa"><a href="#" title="Thêm chìa khóa" data-toggle="modal" data-target="#themchiakhoa"><img src={btn_them_chiakhoa} width="100" alt="Thêm chìa khóa" /></a></div>
+							<div class="them-chia-khoa"><a title="Thêm chìa khóa" data-toggle="modal" data-target="#themchiakhoa" onClick={this.openThemLuot}><img src={btn_them_chiakhoa} width="100" alt="Thêm chìa khóa" /></a></div>
 						</div>
-						<p class="font12 text-white text-center pt-1">Đang đăng nhập &lt;Huyenmy&gt; <a class="text-info" href="#" title="Thoát">Thoát</a></p>
+						<p class="font12 text-white text-center pt-1">Đang đăng nhập &lt;Huyenmy&gt; <a class="text-info" href="#" title="Thoát" onClick={this.logoutAction}>Thoát</a></p>
 						
 					</div>):( <div class="k-box-key">            
 						<div class="d-flex justify-content-center pt-1">
-							<div class="them-chia-khoa"><a href="#" title="Đăng nhập"><img src={btn_dangnhap} width="150" alt="Đăng Nhập" /></a></div>
+							<div class="them-chia-khoa"><a href="#" title="Đăng nhập" onClick={this.loginAction}><img src={btn_dangnhap} width="150" alt="Đăng Nhập" /></a></div>
 						</div>            
 					</div>)}
 					
@@ -733,15 +733,15 @@ class Lucky_Rotation extends React.Component {
 				<div class="container-fluid">
 					<div class="float-left">
 						<ul class="nav flex-column text-float-left">
-							<li class="mt-5"><a href="#" title="Nạp Game" target="_blank">&nbsp;</a></li>
+							<li class="mt-5"><a href="https://scoin.vn/nap-game" title="Nạp Game" target="_blank">&nbsp;</a></li>
 							<li class="mt-3"><a href="#" title="Thể lệ" data-toggle="modal" data-target="#thele">&nbsp;</a></li>
-							<li class="mt-3"><a href="#" title="Vinh danh" data-toggle="modal" data-target="#bangvinhdanh">&nbsp;</a></li>
+							<li class="mt-3"><a href="#" title="Vinh danh" data-toggle="modal" data-target="#bangvinhdanh" onClick={()=>this.getDataVinhDanh('highlights',1)}>&nbsp;</a></li>
 						</ul>
 					</div>
 					<div class="float-right">
 						<ul class="nav flex-column text-float-right">
-							<li class="mt-3"><a href="#" title="Giải thưởng" data-toggle="modal" data-target="#bgiaithuong">&nbsp;</a></li>
-							<li class="mt-3"><a href="#" title="Lịch sử" data-toggle="modal" data-target="#lichsu">&nbsp;</a></li>
+							<li class="mt-3"><a href="#" title="Giải thưởng" data-toggle="modal" data-target="#bgiaithuong" onClick={this.openGiaiThuong}>&nbsp;</a></li>
+							<li class="mt-3"><a href="#" title="Lịch sử" data-toggle="modal" data-target="#lichsu" onClick={()=>this.showModalCodeBonus(1)}>&nbsp;</a></li>
 						</ul>
 					</div>
 				</div>
@@ -863,10 +863,10 @@ class Lucky_Rotation extends React.Component {
 					<div class="modal-body">
 						<ul class="nav nav-pills nav-justified pop-custom">
 						<li class="nav-item">
-							<a class="nav-link active" data-toggle="pill" href="#giaidacbiet">Giải đặc biệt</a>
+							<a class="nav-link active" data-toggle="pill" href="#giaidacbiet" onClick={()=>this.getDataVinhDanh('highlights',1)}>Giải đặc biệt</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#cacgiaikhac">Các giải khác</a>
+							<a class="nav-link" data-toggle="pill" href="#cacgiaikhac" onClick={()=>this.getDataVinhDanh('',1)}>Các giải khác</a>
 						</li>
 						</ul>
 						<div class="tab-content">
@@ -1224,7 +1224,6 @@ class Lucky_Rotation extends React.Component {
 					<div class="modal-header border-bottom-0 pb-0">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-						<h2 class="font-iCielPantonBlack text-brown-shadow text-uppercase text-center pb-0 w-75 mx-auto mt-n5">Thông Báo</h2>
 						<div className="mt-2 text-center">              
 							<h5 className="text-thele lead text-center">Thông báo bảo trì!</h5>
 							<h5 className="text-thele lead text-center">Hệ thống đang được nâng cấp để tối ưu. Vui lòng quay lại sau 10 phút.</h5>
