@@ -43,6 +43,7 @@ import thumb_item_giaithuong from './images/thumb-item-giaithuong.png';
 import btn_dangnhap from './images/btn-dangnhap.png'
 import key_yellow_icon from './images/key-yellow-icon.png';
 import ruong_icons from './images/ruong-icons.png';
+import khobau from './images/khobau.gif';
 
 import ReactResizeDetector from 'react-resize-detector'
 // import spin from './images/spin.gif';
@@ -301,7 +302,7 @@ class Lucky_Rotation extends React.Component {
 				})
 				
 			}else{
-				$('#myModal6').modal('show');
+				$('#hetchiakhoa').modal('show');
 			}
 		} else {
 			$('#myModal5').modal('show');
@@ -358,7 +359,7 @@ class Lucky_Rotation extends React.Component {
 						}, 1700);
 						
 					}else{
-						$('#myModal6').modal('show');
+						$('#hetchiakhoa').modal('show');
 					}
 				}
 			} else {
@@ -384,7 +385,7 @@ class Lucky_Rotation extends React.Component {
 							this.setState({timeout: timeout});	
 						}
 					}else{
-						$('#myModal6').modal('show');
+						$('#hetchiakhoa').modal('show');
 					}
 					this.setState({turnsFree:turnsFree})
 				}else if(data.status ==="04"){
@@ -718,8 +719,8 @@ class Lucky_Rotation extends React.Component {
 					</div>
 					{(isLogin)?(<div class="k-box-key">
 						<div class="d-flex justify-content-around">
-							<div class="mo-1"><a title="Mở 1 lần" data-toggle="modal" data-target="#hetchiakhoa" onClick={this.btnStart}><img src={btn_mo_1lan} width="100" alt="Mở 1 lần"  /></a></div>
-						<div class="mo-td"><a title="Mở tự động" data-toggle="modal" data-target="#motudong" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
+							<div class="mo-1"><a title="Mở 1 lần" data-toggle="modal" onClick={this.btnStart}><img src={btn_mo_1lan} width="100" alt="Mở 1 lần"  /></a></div>
+						<div class="mo-td"><a title="Mở tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
 						</div>
 						<div>
 							<p style={{textAlign:'center', color:'#fff', marginBottom:8, marginTop:8}}>Chìa khóa còn lại: {turnsFree ? turnsFree.toLocaleString() :0} <img src={key_yellow_icon}  width="20"/></p>
@@ -912,8 +913,8 @@ class Lucky_Rotation extends React.Component {
 						</dl>
 
 						<div class="alert alert-secondary font14 text-center">
-							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">5,050,000 Điểm</span></p>
-							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">50,000 Scoin</span> từ Thẻ Scoin hoặc <span class="text-danger">100,000 Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
+							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
+							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} Scoin</span> từ Thẻ Scoin hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
 							<p class="font-weight-bold font14 font-italic"><a class="text-danger" href="#" title="Thêm chìa khóa" data-dismiss="modal" data-toggle="modal" data-target="#themchiakhoa">&raquo; Thêm chìa khóa &laquo;</a></p>
 						</div>
 						<p class="text-center"><a href="#" title="Nạp game" data-dismiss="modal" data-toggle="modal" data-target="#bgiaithuong" onClick={this.openGiaiThuong}><img src={btn_xem_khobau} width="128" alt="Xem kho báu" /></a></p>
@@ -938,8 +939,8 @@ class Lucky_Rotation extends React.Component {
 						</ul>
 						</div>
 						<div class="alert alert-secondary font14 text-center">
-							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">5,050,000 Điểm</span></p>
-							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu 50,000đ từ Thẻ Scoin hoặc <span class="text-danger">100,000 Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
+							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
+							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} Scoin từ Thẻ Scoin</span> hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
 						</div>
 						<p class="text-center"><a href="#" title="Nạp game"><img src={btn_napgame} width="128" alt="Nạp game" /></a></p>
 					</div>
@@ -1087,8 +1088,8 @@ class Lucky_Rotation extends React.Component {
 						<p class="text-center"><img src={emoij_vv} width="64" alt="Chúc mừng" /></p>
 						<p class="text-center font14"><a class="text-dark" href="#" title="Lịch sử">&raquo; Xem lịch sử &laquo;</a></p>
 						<div class="d-flex justify-content-center">
-							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" data-target="#chucmung"><img src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
-							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" data-target="#motudong"><img src={btn_mo_tieptudong} width="100" alt="Mở tiếp tự động" /></a></div>
+							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
+							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tiếp tự động" /></a></div>
 						</div>
 					</div>
 					</div>
@@ -1132,7 +1133,7 @@ class Lucky_Rotation extends React.Component {
 						</div>
 						<div class="alert alert-secondary font14 text-center">
 							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
-							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu {turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} từ Thẻ Scoin hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
+							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} từ Thẻ Scoin </span> hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
 						</div>
 						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game"><img src={btn_napgame} width="128" alt="Nạp game" /></a></p>
 					</div>
@@ -1154,8 +1155,8 @@ class Lucky_Rotation extends React.Component {
 						<p class="text-center"><img src="images/emoij-sad.png" width="64" alt="Rương rỗng" /></p>
 						<p class="text-center font14"><a class="text-dark" href="#" title="Lịch sử">&raquo; Xem lịch sử &laquo;</a></p>
 						<div class="d-flex justify-content-center">
-							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" data-target="#chucmung"><img src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
-							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" data-target="#motudong"><img src={btn_mo_tieptudong} width="100" alt="Mở tiếp tự động" /></a></div>
+							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
+							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tiếp tự động" /></a></div>
 						</div>
 					</div>
 					</div>
@@ -1184,7 +1185,7 @@ class Lucky_Rotation extends React.Component {
 						</ol>
 						</div>
 						<p class="text-center font14"><a class="text-dark" href="#" title="Chi tiết" data-toggle="modal" data-target="#lichsu">&raquo; Vào lịch sử để xem chi tiết &laquo;</a></p>
-						<h5 class="w-100 text-center"><span class="text-danger">Đang mở tự động</span> <span class="spinner-border spinner-border-sm text-danger"></span></h5>        
+						<h5 class="w-100 text-center"><span class="text-danger">Đang mở tự động </span> <span class="spinner-border spinner-border-sm text-danger"></span></h5>        
 					</div>
 					</div>
 				</div>
@@ -1204,6 +1205,21 @@ class Lucky_Rotation extends React.Component {
 					</div>
 				</div>
 			</div>
+
+			{/* <!-- The Modal Kho bau--> */}
+			<div className="modal fade" id="Khobau" >
+				<div className="modal-dialog">
+					<div className="modal-content  bg-transparent border-0 center-screen">
+
+
+					<div className="modal-body text-center">
+						<img src={khobau} class="img-khobau" />
+					</div>
+
+					</div>
+				</div>
+			</div>
+
 
 			{/* <!-- Hệ thống bảo trì--> */}
 			<div class="modal fade" id="myModal12">
