@@ -122,6 +122,7 @@ class Lucky_Rotation extends React.Component {
 			soinValue:0,
 			hideNav:false,
 			goldTimeStatus:false,
+			textAuto: true,
 
 		};
 	}
@@ -386,6 +387,7 @@ class Lucky_Rotation extends React.Component {
 						}
 					}else{
 						$('#hetchiakhoa').modal('show');
+						this.setState({textAuto:false})
 					}
 					this.setState({turnsFree:turnsFree})
 				}else if(data.status ==="04"){
@@ -464,7 +466,7 @@ class Lucky_Rotation extends React.Component {
 			var data=this.props.dataTuDo;
 			if(data!==undefined){
 				if(data.status==='01'){
-					$('#LichSu').modal('show');
+					$('#lichsu').modal('show');
 					this.setState({listCodeBonus:data.data, countCodeBonus:data.totalRecords, noti_tudo:false})
 				}else{
 					$('#myModal11').modal('show');
@@ -593,7 +595,7 @@ class Lucky_Rotation extends React.Component {
 					$('#myModal8').modal('show');
 				})
 			}else{
-				$('#ThemLuot').modal('show');
+				$('#themchiakhoa').modal('show');
 			}
 		}else {
 			$('#myModal5').modal('show');
@@ -692,7 +694,7 @@ class Lucky_Rotation extends React.Component {
 
 
 	render() {
-		const {goldTimeStatus, soinValue,listCountBonus, listKey, activeKey, turnsBuyInfo,status_sukien, xacthuc, scoinCard,height, width, dialogLoginOpen, dialogBonus, auto, dialogWarning, textWarning, isLogin, userTurnSpin, day, hour, minute, second, code,numberPage, message_status, data_auto,message_error,
+		const {textAuto, goldTimeStatus, soinValue,listCountBonus, listKey, activeKey, turnsBuyInfo,status_sukien, xacthuc, scoinCard,height, width, dialogLoginOpen, dialogBonus, auto, dialogWarning, textWarning, isLogin, userTurnSpin, day, hour, minute, second, code,numberPage, message_status, data_auto,message_error,
 			activeRuong, activeHistory, activeBonus, activeVinhDanh, limit, countCodeBonus, countRuong, countKey, countVinhDanh, listHistory, listCodeBonus, listRuong, listVinhDanh,itemBonus, turnsFree, noti_mdt, noti_tudo, hour_live, minute_live, second_live, user}=this.state;
 		const { classes } = this.props;
 		const notification_tudo=noti_tudo?(<span className="badge badge-pill badge-danger position-absolute noti-tudo">!</span>):(<span></span>);
@@ -720,7 +722,7 @@ class Lucky_Rotation extends React.Component {
 					{(isLogin)?(<div class="k-box-key">
 						<div class="d-flex justify-content-around">
 							<div class="mo-1"><a title="Mở 1 lần" data-toggle="modal" onClick={this.btnStart}><img src={btn_mo_1lan} width="100" alt="Mở 1 lần"  /></a></div>
-						<div class="mo-td"><a title="Mở tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
+						<div class="mo-td"><a title="Mở tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tudong} width="100" alt="Mở tự động" /></a></div>
 						</div>
 						<div>
 							<p style={{textAlign:'center', color:'#fff', marginBottom:8, marginTop:8}}>Chìa khóa còn lại: {turnsFree ? turnsFree.toLocaleString() :0} <img src={key_yellow_icon}  width="20"/></p>
@@ -748,7 +750,7 @@ class Lucky_Rotation extends React.Component {
 					<div class="float-right">
 						<ul class="nav flex-column text-float-right">
 							<li class="mt-3"><a href="#" title="Giải thưởng" data-toggle="modal" data-target="#bgiaithuong" onClick={this.openGiaiThuong}>&nbsp;</a></li>
-							<li class="mt-3"><a href="#" title="Lịch sử" data-toggle="modal" data-target="#lichsu" onClick={()=>this.showModalCodeBonus(1)}>&nbsp;</a></li>
+							<li class="mt-3"><a href="#" title="Lịch sử" data-toggle="modal" onClick={()=>this.showModalCodeBonus(1)}>&nbsp;</a></li>
 						</ul>
 					</div>
 				</div>
@@ -788,9 +790,11 @@ class Lucky_Rotation extends React.Component {
 						<div class="font14 pt-4">
 							<h5 class="text-uppercase font14 font-weight-bold text-center">Cơ cấu giải thưởng</h5>
 							<div class="text-cc-giaithuong">
-							<p class="mb-0">Giải đặc biệt - rương báu 5 triệu Scoin: mỗi ngày tối đa 01 giải.</p>
-							<p class="mb-0">Các giải khác: không giới hạn số lượng giải mỗi ngày</p>
-							<p class="mb-0">Tất cả giải thưởng Scoin sẽ được cộng trực tiếp vào tài khoản của game thủ.</p>
+								<ul>
+									<li><p class="mb-0">Giải đặc biệt - rương báu 5 triệu Scoin: mỗi ngày tối đa 01 giải.</p></li>
+									<li><p class="mb-0">Các giải khác: không giới hạn số lượng giải mỗi ngày</p></li>
+									<li><p class="mb-0">Tất cả giải thưởng Scoin sẽ được cộng trực tiếp vào tài khoản của game thủ.</p></li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -903,19 +907,19 @@ class Lucky_Rotation extends React.Component {
 					<div class="modal-body">
 						<dl class="font14">
 							<dt class="pb-1">I. Đối tượng tham gia</dt>
-							<dd class="pl-1">&bull; Tất cả game thủ có tài khoản Scoin. Nếu chưa có <a href="https://scoin.vn/nap-game" title="Đăng ký" target="_blank">&raquo; Đăng ký tại đây &laquo;</a></dd>
-							<dd class="pl-1">&bull; Thời gian SK diễn ra từ 10:00 ngày 19.03 - hết ngày 18.04.2020. Sau khi kết thúc, số chìa khóa sẽ được xóa khỏi hệ thống.</dd>
+							<dd class="pl-1" style={{marginLeft:10}}>&bull; Tất cả game thủ có tài khoản Scoin. Nếu chưa có <a href="https://scoin.vn/nap-game" title="Đăng ký" target="_blank">&raquo; Đăng ký tại đây &laquo;</a></dd>
+							<dd class="pl-1"  style={{marginLeft:10}}>&bull; Thời gian SK diễn ra từ 10:00 ngày 19.03 - hết ngày 18.04.2020. Sau khi kết thúc, số chìa khóa sẽ được xóa khỏi hệ thống.</dd>
 							<dt class="pt-2 pb-1">II. Cách nhận chìa khóa mở rương báu</dt>
-							<dd class="pl-1">&bull; Nạp ví Scoin/ thẻ Scoin vào các game do VTC Mobile phát hành.</dd>
-							<dd class="pl-1">&bull; Mỗi 1 Scoin bạn nạp vào game từ Thẻ Scoin sẽ nhận được 2 Điểm.</dd>
-							<dd class="pl-1">&bull; Mỗi 1 Scoin bạn nạp vào game từ ví Scoin sẽ nhận được 1 Điểm.</dd>
-							<dd class="pl-1">&bull; Mỗi 100,000 Điểm bạn nhận được 01 Chìa khóa được hệ thống tự động quy đổi.</dd>
+							<dd class="pl-1"  style={{marginLeft:10}}>&bull; Nạp ví Scoin/ thẻ Scoin vào các game do VTC Mobile phát hành.</dd>
+							<dd class="pl-1"  style={{marginLeft:10}}>&bull; Mỗi 1 Scoin bạn nạp vào game từ Thẻ Scoin sẽ nhận được 2 Điểm.</dd>
+							<dd class="pl-1"  style={{marginLeft:10}}>&bull; Mỗi 1 Scoin bạn nạp vào game từ ví Scoin sẽ nhận được 1 Điểm.</dd>
+							<dd class="pl-1"  style={{marginLeft:10}}>&bull; Mỗi 100,000 Điểm bạn nhận được 01 Chìa khóa được hệ thống tự động quy đổi.</dd>
 						</dl>
 
 						<div class="alert alert-secondary font14 text-center">
 							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
 							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} Scoin</span> từ Thẻ Scoin hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
-							<p class="font-weight-bold font14 font-italic"><a class="text-danger" href="#" title="Thêm chìa khóa" data-dismiss="modal" data-toggle="modal" data-target="#themchiakhoa">&raquo; Thêm chìa khóa &laquo;</a></p>
+							<p class="font-weight-bold font14"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank">Thêm Chìa khóa <img src={key_yellow_icon} width="20" class="img-fluid" /></a></p>
 						</div>
 						<p class="text-center"><a href="#" title="Nạp game" data-dismiss="modal" data-toggle="modal" data-target="#bgiaithuong" onClick={this.openGiaiThuong}><img src={btn_xem_khobau} width="128" alt="Xem kho báu" /></a></p>
 					</div>
@@ -942,7 +946,7 @@ class Lucky_Rotation extends React.Component {
 							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
 							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} Scoin từ Thẻ Scoin</span> hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
 						</div>
-						<p class="text-center"><a href="#" title="Nạp game"><img src={btn_napgame} width="128" alt="Nạp game" /></a></p>
+						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank"><img src={btn_napgame} width="128" alt="Nạp game" /></a></p>
 					</div>
 					</div>
 				</div>
@@ -975,7 +979,7 @@ class Lucky_Rotation extends React.Component {
 									<tr style={{borderBottom: "solid 2px #10e0e0"}}>
 										<th class="align-top">Tên</th>
 										<th class="align-top">Nội dung</th>
-										<th class="align-top">Giải thưởng trúng</th>
+										<th class="align-top">Thời gian trúng</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -1007,8 +1011,8 @@ class Lucky_Rotation extends React.Component {
 									<thead>
 									<tr style={{borderBottom: "solid 2px #10e0e0"}}>
 										<th class="align-top">Tên</th>
-										<th class="align-top">Nội dung</th>
-										<th class="align-top">Giải thưởng trúng</th>
+										<th class="align-top">Kết quả</th>
+										<th class="align-top">Thời gian</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -1039,9 +1043,9 @@ class Lucky_Rotation extends React.Component {
 								<table class="table table-borderless table-striped small text-center">
 									<thead>
 									<tr style={{borderBottom: "solid 2px #10e0e0"}}>
-										<th class="align-top">Tên</th>
-										<th class="align-top">Nội dung</th>
-										<th class="align-top">Giải thưởng trúng</th>
+										<th class="align-top">Giải thưởng</th>
+										<th class="align-top">Mở rương</th>
+										<th class="align-top">Thời gian</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -1089,7 +1093,7 @@ class Lucky_Rotation extends React.Component {
 						<p class="text-center font14"><a class="text-dark" href="#" title="Lịch sử">&raquo; Xem lịch sử &laquo;</a></p>
 						<div class="d-flex justify-content-center">
 							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
-							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tiếp tự động" /></a></div>
+							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
 						</div>
 					</div>
 					</div>
@@ -1104,8 +1108,7 @@ class Lucky_Rotation extends React.Component {
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 						<div class="modal-body pt-0">
-							<h2 class="font-iCielPantonBlack text-brown-shadow text-uppercase text-center pb-0 w-75 mx-auto mt-n5">Thông Báo</h2>
-							<div className="mt-2 text-center">              
+							<div className="mt-2 text-center">          
 								<h5 className="text-thele lead text-center py-3">Xin vui lòng đăng nhập!</h5>
 								<button type="button" className="btn btn-danger mx-auto text-center my-3" onClick={this.loginAction}>Đăng nhập</button>
 							</div>  
@@ -1135,7 +1138,7 @@ class Lucky_Rotation extends React.Component {
 							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
 							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} từ Thẻ Scoin </span> hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
 						</div>
-						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game"><img src={btn_napgame} width="128" alt="Nạp game" /></a></p>
+						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank"><img src={btn_napgame} width="128" alt="Nạp game" /></a></p>
 					</div>
 					</div>
 				</div>
@@ -1156,7 +1159,7 @@ class Lucky_Rotation extends React.Component {
 						<p class="text-center font14"><a class="text-dark" href="#" title="Lịch sử">&raquo; Xem lịch sử &laquo;</a></p>
 						<div class="d-flex justify-content-center">
 							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
-							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tiếp tự động" /></a></div>
+							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
 						</div>
 					</div>
 					</div>
@@ -1173,19 +1176,18 @@ class Lucky_Rotation extends React.Component {
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body pt-0">
-						<div class="alert alert-secondary font14">
+						<div id="auto" class="alert alert-secondary font14">
 						<ol>
-							<li>Rương báu rỗng</li>
-							<li>Rương báu rỗng</li>
-							<li>Mở rương nhận 5k Scoin vào ví</li>
-							<li>Mở rương nhận 50 triệu Scoin vào ví</li>
-							<li>Rương báu rỗng</li>
-							<li>Mở rương nhận 100k Scoin vào ví</li>
-							<li>Rương báu rỗng</li>
+							{data_auto.map((obj, key) => (
+									<li className="list-group-item" key={key}>{key+1}. {obj}</li>
+							))}
 						</ol>
 						</div>
 						<p class="text-center font14"><a class="text-dark" href="#" title="Chi tiết" data-toggle="modal" data-target="#lichsu">&raquo; Vào lịch sử để xem chi tiết &laquo;</a></p>
-						<h5 class="w-100 text-center"><span class="text-danger">Đang mở tự động </span> <span class="spinner-border spinner-border-sm text-danger"></span></h5>        
+						
+						{(textAuto)?(<h5 class="w-100 text-center"><span class="text-danger">Đang mở tự động </span> <span class="spinner-border spinner-border-sm text-danger"></span></h5>):(
+							<p className="text-thele text-center font-iCielPantonBlack" style={{color:'red'}}>Đã dùng hết Chìa khóa</p>
+						)}        
 					</div>
 					</div>
 				</div>
