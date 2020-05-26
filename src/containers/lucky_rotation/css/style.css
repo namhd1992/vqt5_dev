@@ -47,7 +47,17 @@ body {background-color: #000005;}
 .text-cc-giaithuong {padding-left: 25%;}
 .nav-pills.pop-custom .nav-link.active {background-color:#a64935;}
 .pop-custom a.nav-link {color: #10395e}
-
+.img-hover {	
+	opacity: 1;
+  
+	height: auto;
+	transition: .1s ease;
+	backface-visibility: hidden;
+  }
+  .img-hover:hover {
+  filter: contrast(80%) hue-rotate(330deg);
+  cursor: pointer;
+  }
 
 @media (max-width: 1440px) {
 .k-fixed-bottom {top: 60%; }

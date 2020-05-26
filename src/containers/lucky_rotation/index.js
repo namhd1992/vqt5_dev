@@ -740,20 +740,20 @@ class Lucky_Rotation extends React.Component {
 					</div>
 					{(isLogin)?(<div class="k-box-key">
 						<div class="d-flex justify-content-around">
-							<div class="mo-1"><a title="Mở 1 lần" data-toggle="modal" onClick={this.btnStart}><img src={btn_mo_1lan} width="100" alt="Mở 1 lần"  /></a></div>
-						<div class="mo-td"><a title="Mở tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tudong} width="100" alt="Mở tự động" /></a></div>
+							<div class="mo-1"><a title="Mở 1 lần" data-toggle="modal" onClick={this.btnStart}><img class="img-hover" src={btn_mo_1lan} width="100" alt="Mở 1 lần"  /></a></div>
+						<div class="mo-td"><a title="Mở tự động" data-toggle="modal" onClick={this.autoOpen}><img class="img-hover" src={btn_mo_tudong} width="100" alt="Mở tự động" /></a></div>
 						</div>
 						<div>
 							<p class="font14" style={{textAlign:'center', color:'#fff', marginBottom:5, marginTop:5}}>Chìa khóa còn lại: {turnsFree ? turnsFree.toLocaleString() :0} <img src={key_yellow_icon}  width="20"/></p>
 						</div> 
 						<div class="d-flex justify-content-center">
-							<div class="them-chia-khoa"><a title="Thêm chìa khóa" data-toggle="modal" data-target="#themchiakhoa" onClick={this.openThemLuot}><img src={btn_them_chiakhoa} width="100" alt="Thêm chìa khóa" /></a></div>
+							<div class="them-chia-khoa"><a title="Thêm chìa khóa" data-toggle="modal" data-target="#themchiakhoa" onClick={this.openThemLuot}><img class="img-hover" src={btn_them_chiakhoa} width="100" alt="Thêm chìa khóa" /></a></div>
 						</div>
 						<p class="font12 text-white text-center pt-1">Đang đăng nhập &lt;{this.getUsername(userTurnSpin.currName)}&gt; <a class="text-info" href="#" title="Thoát" onClick={this.logoutAction}>Thoát</a></p>
 						
 					</div>):( <div class="k-box-key">            
 						<div class="d-flex justify-content-center pt-1">
-							<div class="them-chia-khoa"><a href="#" title="Đăng nhập" onClick={this.loginAction}><img src={btn_dangnhap} width="150" alt="Đăng Nhập" /></a></div>
+							<div class="them-chia-khoa"><a href="#" title="Đăng nhập" onClick={this.loginAction}><img  src={btn_dangnhap} width="150" alt="Đăng Nhập" /></a></div>
 						</div>            
 					</div>)}
 					
@@ -990,7 +990,7 @@ class Lucky_Rotation extends React.Component {
 							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
 							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} Scoin từ Thẻ Scoin</span> hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
 						</div>
-						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank"><img src={btn_napgame} width="128" alt="Nạp game" /></a></p>
+						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank"><img class="img-hover" src={btn_napgame} width="128" alt="Nạp game" /></a></p>
 					</div>
 					</div>
 				</div>
@@ -1136,8 +1136,8 @@ class Lucky_Rotation extends React.Component {
 						<p class="text-center"><img src={emoij_vv} width="64" alt="Chúc mừng" /></p>
 						<p class="text-center font14"><a class="text-dark" href="#" title="Lịch sử">&raquo; Xem lịch sử &laquo;</a></p>
 						<div class="d-flex justify-content-center">
-							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
-							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
+							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img class="img-hover" src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
+							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" onClick={this.autoOpen}><img class="img-hover" src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
 						</div>
 					</div>
 					</div>
@@ -1182,7 +1182,7 @@ class Lucky_Rotation extends React.Component {
 							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
 							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} Scoin từ Thẻ Scoin </span> hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
 						</div>
-						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank"><img src={btn_napgame} width="128" alt="Nạp game" /></a></p>
+						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank"><img class="img-hover" src={btn_napgame} width="128" alt="Nạp game" /></a></p>
 					</div>
 					</div>
 				</div>
@@ -1202,8 +1202,8 @@ class Lucky_Rotation extends React.Component {
 						<p class="text-center"><img src={emoij_sad} width="64" alt="Rương rỗng" /></p>
 						<p class="text-center font14"><a class="text-dark" href="#" title="Lịch sử">&raquo; Xem lịch sử &laquo;</a></p>
 						<div class="d-flex justify-content-center">
-							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
-							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
+							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img class="img-hover" src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
+							<div class="mo-td pl-1"><a href="#" title="Mở tiếp tự động" data-toggle="modal" onClick={this.autoOpen}><img class="img-hover" src={btn_mo_tieptudong} width="100" alt="Mở tự động" /></a></div>
 						</div>
 					</div>
 					</div>
