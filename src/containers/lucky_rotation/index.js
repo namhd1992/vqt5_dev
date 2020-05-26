@@ -123,7 +123,6 @@ class Lucky_Rotation extends React.Component {
 			hideNav:false,
 			goldTimeStatus:false,
 			textAuto: true,
-
 		};
 	}
 	componentWillMount(){
@@ -193,18 +192,34 @@ class Lucky_Rotation extends React.Component {
 	getStatus=(luckySpin)=>{
 		var start=luckySpin.startDate;
 		var end=luckySpin.endDate;
+		var goldTimeStart=luckySpin.goldTimeStart;
+		var goldTimeEnd=luckySpin.goldTimeEnd;
+		var goldTimeStatus=luckySpin.goldTimeStatus;
+		const hh=48*360*1000;
+		var goal_upcoming=(goldTimeStart - time > 0 && goldTimeStart - time < hh) ? true : false;
+		console.log(goal_upcoming)
 		var time=Date.now();
-
-		if (time < start) {
-			this.timeRemain(start)
-			this.setState({ status_sukien: 'Sự kiện chưa diễn ra.', message_status:"Sự kiện chưa diễn ra.", start:true});
-		}
-		if (time > start && time < end) {
-			this.timeRemain(end)
-			this.setState({ status_sukien: "Sự kiện đang diễn ra còn", live:true});
-		}
-		if (time > end) {
-			this.setState({ status_sukien: "Sự kiện đã kết thúc.", message_status:"Sự kiện đã kết thúc.", finish:true});
+		if(goldTimeStatus){
+			this.timeRemain(goldTimeEnd)
+			this.setState({ status_sukien: " Giờ Vàng còn lại", live:true});
+		}else{
+			if(goal_upcoming){
+				this.timeRemain(goldTimeStart)
+				this.setState({ status_sukien: 'Sắp tới giờ vàng.', message_status:"Sắp tới giờ vàng.", start:true});
+			}else{
+				if (time < start) {
+					this.timeRemain(start)
+					this.setState({ status_sukien: 'Sự kiện chưa diễn ra.', message_status:"Sự kiện chưa diễn ra.", start:true});
+				}
+				if (time > start && time < end) {
+					this.timeRemain(end)
+					this.setState({ status_sukien: "Sự kiện đang diễn ra còn", live:true});
+				}
+				if (time > end) {
+					this.setState({ status_sukien: "Sự kiện đã kết thúc.", message_status:"Sự kiện đã kết thúc.", finish:true});
+				}
+			}
+			
 		}
 	}
 
@@ -312,6 +327,8 @@ class Lucky_Rotation extends React.Component {
 
 	btnStart=()=>{
 		const {server_err, start, finish}=this.state;
+		$('#chucmung').modal('hide');
+		$('#ruongrong').modal('hide');
 		if(server_err){
 			$('#myModal12').modal('show');
 		}else{
@@ -336,6 +353,8 @@ class Lucky_Rotation extends React.Component {
 		const {turnsFree, luckySpin, server_err, start, finish}=this.state;
 		var user = JSON.parse(localStorage.getItem("user"));
 		var time=Date.now();
+		$('#chucmung').modal('hide');
+		$('#ruongrong').modal('hide');
 		if(server_err){
 			$('#myModal12').modal('show');
 		}else{
@@ -703,13 +722,13 @@ class Lucky_Rotation extends React.Component {
 			<div class={goldTimeStatus ? "container-fluid bg-page position-relative" : "container-fluid b-bg-page position-relative"} >
 				<div class="k-fixed-bottom">
 					<div class="k-box-time">
-						<h2 class="text-center text-white font-weight-bold font-italic">Sắp tới giờ vàng</h2>
+						<h2 class="text-center text-white font-weight-bold font-italic">{status_sukien}</h2>
 						<table class="table table-borderless k-tbl-boxtime m-0 p-0" align="center">
 						<tr>
-							<td class="k-cell-timer-p1 text-white k-display-3 text-center font-weight-bold p-2 align-middle font-mijasultra">{day}</td>
-							<td class="k-cell-timer-p1 text-white k-display-3 text-center font-weight-bold p-2 align-middle font-mijasultra">{hour}</td>
-							<td class="k-cell-timer-p1 text-white k-display-5 text-center font-weight-bold p-2 align-middle font-mijasultra">{minute}</td>
-							<td class="k-cell-timer-p1 text-white k-display-3 text-center font-weight-bold p-2 align-middle font-mijasultra">{second}</td>
+							<td class="k-cell-timer-p1 text-white k-display-5 text-center font-weight-bold p-1 align-middle font-mijasultra">{day}</td>
+							<td class="k-cell-timer-p1 text-white k-display-5 text-center font-weight-bold p-1 align-middle font-mijasultra">{hour}</td>
+							<td class="k-cell-timer-p1 text-white k-display-5 text-center font-weight-bold p-1 align-middle font-mijasultra">{minute}</td>
+							<td class="k-cell-timer-p1 text-white k-display-5 text-center font-weight-bold p-1 align-middle font-mijasultra">{second}</td>
 						</tr>
 						<tr>
 							<td align="center" class="pt-0 k-h6 text-white font-italic pb-1">Ngày</td>
@@ -725,7 +744,7 @@ class Lucky_Rotation extends React.Component {
 						<div class="mo-td"><a title="Mở tự động" data-toggle="modal" onClick={this.autoOpen}><img src={btn_mo_tudong} width="100" alt="Mở tự động" /></a></div>
 						</div>
 						<div>
-							<p style={{textAlign:'center', color:'#fff', marginBottom:8, marginTop:8}}>Chìa khóa còn lại: {turnsFree ? turnsFree.toLocaleString() :0} <img src={key_yellow_icon}  width="20"/></p>
+							<p class="font14" style={{textAlign:'center', color:'#fff', marginBottom:5, marginTop:5}}>Chìa khóa còn lại: {turnsFree ? turnsFree.toLocaleString() :0} <img src={key_yellow_icon}  width="20"/></p>
 						</div> 
 						<div class="d-flex justify-content-center">
 							<div class="them-chia-khoa"><a title="Thêm chìa khóa" data-toggle="modal" data-target="#themchiakhoa" onClick={this.openThemLuot}><img src={btn_them_chiakhoa} width="100" alt="Thêm chìa khóa" /></a></div>
@@ -739,7 +758,7 @@ class Lucky_Rotation extends React.Component {
 					</div>)}
 					
 				</div>
-				<div class="container-fluid">
+				<div class="container">
 					<div class="float-left">
 						<ul class="nav flex-column text-float-left">
 							<li class="mt-5"><a href="https://scoin.vn/nap-game" title="Nạp Game" target="_blank">&nbsp;</a></li>
@@ -777,23 +796,48 @@ class Lucky_Rotation extends React.Component {
 						<div class="row">
 							{listCountBonus.map((obj, key) => (
 								<div class="col-lg-3 col-md-4 col-6 p-1">
-								<div class="media border pt-1 pr-0 pb-1 pl-1 bg-item-giaithuong">
-								<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="50" />
-								<div class="media-body">
-									<h4 class="font12 font-weight-bold text-uppercase text-danger mb-0">{this.getNameScoin(obj.itemName)}</h4>
-									<p class="font12 mb-0">Còn {obj.itemQuantityExist ? obj.itemQuantityExist.toLocaleString() :0} giải</p>
+									{(goldTimeStatus)?(<div>
+										{(obj.itemName==='5 Triệu Scoin')?(<div class="media border pt-1 pr-0 pb-1 pl-1 bg-item-giaithuong bg-danger progress-bar-striped progress-bar-animated shadow-sm">
+											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="50" />
+											<div class="media-body">
+												<h4 class="font12 font-weight-bold text-uppercase text-white mb-0">10 Triệu</h4>
+												<p class="font12 mb-0 text-white">Duy nhất Giờ vàng</p>
+											</div>
+										</div>):(<div class="media border pt-1 pr-0 pb-1 pl-1 bg-item-giaithuong">
+											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="50" />
+											<div class="media-body">
+												<h4 class="font12 font-weight-bold text-uppercase text-danger mb-0">{this.getNameScoin(obj.itemName)}</h4>
+												<p class="font12 mb-0">Còn {obj.itemQuantityExist ? obj.itemQuantityExist.toLocaleString() :0} giải</p>
+											</div>
+										</div>)}
+										
+									</div>):(
+										<div>
+											{(obj.itemName==='5 Triệu Scoin')?(<div class="media border pt-1 pr-0 pb-1 pl-1 bg-item-giaithuong bg-danger progress-bar-striped progress-bar-animated shadow-sm">
+											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="50" />
+											<div class="media-body">
+												<h4 class="font12 font-weight-bold text-uppercase text-white mb-0">10 Triệu</h4>
+												<p class="font12 mb-0 text-danger">Mỗi ngày 1 giải</p>
+											</div>
+										</div>):(<div class="media border pt-1 pr-0 pb-1 pl-1 bg-item-giaithuong">
+											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="50" />
+											<div class="media-body">
+												<h4 class="font12 font-weight-bold text-uppercase text-danger mb-0">{this.getNameScoin(obj.itemName)}</h4>
+												<p class="font12 mb-0">Còn {obj.itemQuantityExist ? obj.itemQuantityExist.toLocaleString() :0} giải</p>
+											</div>
+										</div>)}
+										</div>
+									)}
 								</div>
-								</div>
-							</div>
 							))}
 						</div>
 						<div class="font14 pt-4">
 							<h5 class="text-uppercase font14 font-weight-bold text-center">Cơ cấu giải thưởng</h5>
-							<div class="text-cc-giaithuong">
-								<ul>
-									<li><p class="mb-0">Giải đặc biệt - rương báu 5 triệu Scoin: mỗi ngày tối đa 01 giải.</p></li>
-									<li><p class="mb-0">Các giải khác: không giới hạn số lượng giải mỗi ngày</p></li>
-									<li><p class="mb-0">Tất cả giải thưởng Scoin sẽ được cộng trực tiếp vào tài khoản của game thủ.</p></li>
+							<div class="text-center">
+								<ul class="list-unstyled">
+									<li><p class="mb-0"><span style={{fontSize:25}}>&#8226;</span>&nbsp;&nbsp;  Giải đặc biệt - rương báu 5 triệu Scoin: mỗi ngày tối đa 01 giải.</p></li>
+									<li><p class="mb-0"><span style={{fontSize:25}}>&#8226;</span>&nbsp;&nbsp;  Các giải khác: không giới hạn số lượng giải mỗi ngày</p></li>
+									<li><p class="mb-0"><span style={{fontSize:25}}>&#8226;</span>&nbsp;&nbsp;  Tất cả giải thưởng Scoin sẽ được cộng trực tiếp vào tài khoản của game thủ.</p></li>
 								</ul>
 							</div>
 						</div>
@@ -1010,7 +1054,7 @@ class Lucky_Rotation extends React.Component {
 								<table class="table table-borderless table-striped small text-center">
 									<thead>
 									<tr style={{borderBottom: "solid 2px #10e0e0"}}>
-										<th class="align-top">Tên</th>
+										<th class="align-top">STT</th>
 										<th class="align-top">Kết quả</th>
 										<th class="align-top">Thời gian</th>
 									</tr>
@@ -1043,8 +1087,8 @@ class Lucky_Rotation extends React.Component {
 								<table class="table table-borderless table-striped small text-center">
 									<thead>
 									<tr style={{borderBottom: "solid 2px #10e0e0"}}>
-										<th class="align-top">Giải thưởng</th>
-										<th class="align-top">Mở rương</th>
+										<th class="align-top">STT</th>
+										<th class="align-top">Số lượng</th>
 										<th class="align-top">Thời gian</th>
 									</tr>
 									</thead>
@@ -1118,7 +1162,7 @@ class Lucky_Rotation extends React.Component {
 			</div>
 
 			{/* <!-- The Modal Thông báo hết lượt => ok--> */}
-			<div class="modal fade" id="hetchiakhoa">
+			<div class="modal fade" id="hetchiakhoa" style={{zIndex:10001}}>
 				<div class="modal-dialog">
 					<div class="modal-content">
 					<div class="modal-header border-bottom-0 pb-0">
@@ -1136,7 +1180,7 @@ class Lucky_Rotation extends React.Component {
 						</div>
 						<div class="alert alert-secondary font14 text-center">
 							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
-							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} từ Thẻ Scoin </span> hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
+							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} Scoin từ Thẻ Scoin </span> hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
 						</div>
 						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank"><img src={btn_napgame} width="128" alt="Nạp game" /></a></p>
 					</div>
@@ -1168,24 +1212,24 @@ class Lucky_Rotation extends React.Component {
 
 			{/* <!-- The Modal Kết quả quay tự động  => ok--> */}
 
-			<div class="modal fade" id="motudong">
+			<div class="modal fade" id="motudong" data-keyboard="false" data-backdrop="static">
 				<div class="modal-dialog">
 					<div class="modal-content">
 					<div class="modal-header border-bottom-0">
 						<h4 class="modal-title w-100 text-center"><span class="text-danger font-weight-bold text-uppercase">Kết quả</span><br /><span class="font14 small">Kết quả mở rương báu tự động</span></h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<button type="button" class="close" data-dismiss="modal" onClick={this.closePopupAuto}>&times;</button>
 					</div>
 					<div class="modal-body pt-0">
-						<div id="auto" class="alert alert-secondary font14">
+						<div id="auto" class="table-responsive alert alert-secondary font14" style={{height:300}}>
 						<ol>
 							{data_auto.map((obj, key) => (
-									<li className="list-group-item" key={key}>{key+1}. {obj}</li>
+									<li key={key}>{key+1}. {obj}</li>
 							))}
 						</ol>
 						</div>
 						<p class="text-center font14"><a class="text-dark" href="#" title="Chi tiết" data-toggle="modal" data-target="#lichsu">&raquo; Vào lịch sử để xem chi tiết &laquo;</a></p>
 						
-						{(textAuto)?(<h5 class="w-100 text-center"><span class="text-danger">Đang mở tự động </span> <span class="spinner-border spinner-border-sm text-danger"></span></h5>):(
+						{(textAuto)?(<h5 class="w-100 text-center"><span class="text-danger" style={{fontFamily:'roboto'}}>Đang mở tự động </span> <span class="spinner-border spinner-border-sm text-danger"></span></h5>):(
 							<p className="text-thele text-center font-iCielPantonBlack" style={{color:'red'}}>Đã dùng hết Chìa khóa</p>
 						)}        
 					</div>
