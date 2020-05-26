@@ -269,11 +269,11 @@ class Lucky_Rotation extends React.Component {
 								$('#Khobau').modal('show');
 								setTimeout(() => {
 									if(data.data.type!=="ACTION"){
-										$('#myModal4').modal('show');
+										$('#chucmung').modal('show');
 										this.setState({noti_tudo:true})
 										this.getDataVinhDanh(type_item, 1);
 									}else{
-										$('#myModal7').modal('show');
+										$('#ruongrong').modal('show');
 									}
 									this.getDetailData();
 									$('#Khobau').modal('hide');
@@ -352,7 +352,7 @@ class Lucky_Rotation extends React.Component {
 					if(turnsFree>0){
 						$('#Khobau').modal('show');
 						setTimeout(() => {
-							$('#myModal9').modal('show');
+							$('#motudong').modal('show');
 							this.setState({auto:true},()=>{
 								this.start()
 							});
@@ -439,7 +439,7 @@ class Lucky_Rotation extends React.Component {
 		var user = JSON.parse(localStorage.getItem("user"));
 		if (user !== null) {
 			this.getDataTuDo(user);
-			$('#myModal4').modal('hide');
+			$('#chucmung').modal('hide');
 			$('#myModal2').modal('show');
 		}else {
 			$('#myModal5').modal('show');
@@ -454,7 +454,7 @@ class Lucky_Rotation extends React.Component {
 		console.log(user)
 		if(user !== null){
 			this.getBonus(user, pageNumber)
-			$('#myModal4').modal('hide');
+			$('#chucmung').modal('hide');
 		}else {
 			$('#myModal5').modal('show');
 		}
@@ -606,25 +606,25 @@ class Lucky_Rotation extends React.Component {
 		const {timeout}=this.state;
 		this.setState({ auto:false});
 		clearTimeout(timeout)
-		$('#myModal9').modal('hide');
+		$('#motudong').modal('hide');
 	}
 
 
 
 	hideModalDetailBonus=()=>{
-		$('#myModal4').modal('hide');
+		$('#chucmung').modal('hide');
 	}
 	closeServerErr=()=>{
 		$('#myModal12').modal('hide');
 	}
 
 	closeModal7=()=>{
-		$('#myModal7').modal('hide');
+		$('#ruongrong').modal('hide');
 		this.btnStart()
 	}
 
 	closeModal4=()=>{
-		$('#myModal4').modal('hide');
+		$('#chucmung').modal('hide');
 		this.btnStart();
 	}
 
@@ -1155,7 +1155,7 @@ class Lucky_Rotation extends React.Component {
 					</div>
 					<div class="modal-body pt-0">
 						<p class="text-center font14">Chúc may mắn lần sau.</p>
-						<p class="text-center"><img src="images/emoij-sad.png" width="64" alt="Rương rỗng" /></p>
+						<p class="text-center"><img src={emoij_sad} width="64" alt="Rương rỗng" /></p>
 						<p class="text-center font14"><a class="text-dark" href="#" title="Lịch sử">&raquo; Xem lịch sử &laquo;</a></p>
 						<div class="d-flex justify-content-center">
 							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
