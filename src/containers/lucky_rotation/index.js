@@ -44,7 +44,7 @@ import btn_dangnhap from './images/btn-dangnhap.png'
 import key_yellow_icon from './images/key-yellow-icon.png';
 import ruong_icons from './images/ruong-icons.png';
 import khobau from './images/khobau.gif';
-
+import logo_scoin from './images/logo-scoin.png';
 import ReactResizeDetector from 'react-resize-detector'
 // import spin from './images/spin.gif';
 import $ from 'jquery';
@@ -824,31 +824,31 @@ class Lucky_Rotation extends React.Component {
 								<div class="col-lg-3 col-md-4 col-6 p-1">
 									{(goldTimeStatus)?(<div>
 										{(obj.itemName==='5 Triệu Scoin')?(<div class="media border pt-1 pr-0 pb-1 pl-1 bg-item-giaithuong bg-danger progress-bar-striped progress-bar-animated shadow-sm">
-											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="50" />
+											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="45" />
 											<div class="media-body">
-												<h4 class="font12 font-weight-bold text-uppercase text-white mb-0">10 Triệu</h4>
+												<h4 class="font12 font-weight-bold text-uppercase text-white mb-0">10 Triệu <img src={logo_scoin} width="45" class="img-fluid" /></h4>
 												<p class="font12 mb-0 text-white">Duy nhất Giờ vàng</p>
 											</div>
 										</div>):(<div class="media border pt-1 pr-0 pb-1 pl-1 bg-item-giaithuong">
-											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="50" />
+											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="45" />
 											<div class="media-body">
-												<h4 class="font12 font-weight-bold text-uppercase text-danger mb-0">{this.getNameScoin(obj.itemName)}</h4>
+												<h4 class="font12 font-weight-bold text-uppercase text-danger mb-0">{this.getNameScoin(obj.itemName)} <img src={logo_scoin} width="45" class="img-fluid" /></h4>
 												<p class="font12 mb-0">Còn {obj.itemQuantityExist ? obj.itemQuantityExist.toLocaleString() :0} giải</p>
 											</div>
 										</div>)}
 										
 									</div>):(
 										<div>
-											{(obj.itemName==='5 Triệu Scoin')?(<div class="media border pt-1 pr-0 pb-1 pl-1 bg-item-giaithuong bg-danger progress-bar-striped progress-bar-animated shadow-sm">
-											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="50" />
+											{(obj.itemName==='5 Triệu Scoin')?(<div class="media border pt-1 pr-0 pb-1 pl-1 bg-item-giaithuong">
+											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="45" />
 											<div class="media-body">
-												<h4 class="font12 font-weight-bold text-uppercase text-white mb-0">10 Triệu</h4>
+												<h4 class="font12 font-weight-bold text-uppercase text-danger mb-0">5 Triệu <img src={logo_scoin} width="45" class="img-fluid" /></h4>
 												<p class="font12 mb-0 text-danger">Mỗi ngày 1 giải</p>
 											</div>
 										</div>):(<div class="media border pt-1 pr-0 pb-1 pl-1 bg-item-giaithuong">
-											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="50" />
+											<img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="45" />
 											<div class="media-body">
-												<h4 class="font12 font-weight-bold text-uppercase text-danger mb-0">{this.getNameScoin(obj.itemName)}</h4>
+												<h4 class="font12 font-weight-bold text-uppercase text-danger mb-0">{this.getNameScoin(obj.itemName)} <img src={logo_scoin} width="45" class="img-fluid" /></h4>
 												<p class="font12 mb-0">Còn {obj.itemQuantityExist ? obj.itemQuantityExist.toLocaleString() :0} giải</p>
 											</div>
 										</div>)}
@@ -1157,9 +1157,9 @@ class Lucky_Rotation extends React.Component {
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body pt-0">
-						<p class="text-center mb-1 font14">Bạn vừa tìm được <span class="text-danger">{itemBonus.name}</span> Scoin khi mở rương!</p>
+						<p class="text-center mb-1 font14">Bạn vừa tìm được <span class="text-danger">{itemBonus.name}</span> khi mở rương!</p>
 						<p class="text-center font14">(Phần thưởng đã cộng trực tiếp vào ví Scoin.vn)</p>
-						<p class="text-center"><img src={emoij_vv} width="64" alt="Chúc mừng" /></p>
+						<p class="text-center"><img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="45" /></p>
 						<p class="text-center font14"><a class="text-dark" href="#" title="Lịch sử">&raquo; Xem lịch sử &laquo;</a></p>
 						<div class="d-flex justify-content-center">
 							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img class="img-hover" src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
@@ -1249,7 +1249,7 @@ class Lucky_Rotation extends React.Component {
 						<div id="auto" class="table-responsive alert alert-secondary font14" style={{height:300}}>
 						<ol>
 							{data_auto.map((obj, key) => (
-									<li key={key}>{key+1}. {obj}</li>
+									<li key={key}>{obj}</li>
 							))}
 						</ol>
 						</div>
