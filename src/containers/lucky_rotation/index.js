@@ -930,7 +930,7 @@ class Lucky_Rotation extends React.Component {
 										<tr style={{borderBottom: "solid 2px #10e0e0"}}>
 											<th class="align-top">Tên tài khoản</th>
 											<th class="align-top">Tên giải</th>
-											<th class="align-top">Giải thưởng trúng</th>
+											<th class="align-top">Thời gian trúng</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -1033,13 +1033,13 @@ class Lucky_Rotation extends React.Component {
 					<div class="modal-body">
 						<ul class="nav nav-pills nav-justified pop-custom">
 						<li class="nav-item">
-							<a class="nav-link active" data-toggle="pill" href="#giaithuong" onClick={()=>this.getBonus(user, activeBonus)}>Giải thưởng</a>
+							<a class="nav-link active" style={{padding:'10px 3px 10px 3px'}} data-toggle="pill" href="#giaithuong" onClick={()=>this.getBonus(user, activeBonus)}>G.thưởng</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#moruong" onClick={()=>this.getRuong(user,activeRuong)}>Mở rương</a>
+							<a class="nav-link" style={{padding:'10px 3px 10px 3px'}} data-toggle="pill" href="#moruong" onClick={()=>this.getRuong(user,activeRuong)}>Mở rương</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#nhanchiakhoa" onClick={()=>this.getKey(user,activeKey)}>Nhận chìa khóa</a>
+							<a class="nav-link" style={{padding:'10px 3px 10px 3px'}} data-toggle="pill" href="#nhanchiakhoa" onClick={()=>this.getKey(user,activeKey)}>Nhận chìa</a>
 						</li>
 						</ul>
 						<div class="tab-content">

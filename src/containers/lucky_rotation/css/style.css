@@ -40,7 +40,7 @@ body {background-color: #000005;}
 .float-right {margin-top: 15%; margin-right: 5%; background:url(../images/menu-float-right.png) no-repeat; width: 64px; height: 120px; z-index: 998}
 .text-float-right li a {width: 64px; height: 48px; display:block; margin-left: 10px;}
 .pag-custom .page-item {margin: 5px;}
-.pag-custom .page-link {background-color: #10395e; border-color: #10395e; border-radius: 4px; color:#FFFFFF; padding: 3px 10px}
+.pag-custom .page-link {background-color: #FFFFFF; border-color: #007bff; border-radius: 4px; color:#007bff; padding: 3px 10px}
 .pag-custom .page-be {background-color: #a64935; border-color: #a64935;}
 .pag-custom .page-item.active .page-link {background-color: #a64935; border-color: #a64935;}
 .bg-item-giaithuong {background-color: #d7d7d7; border-radius: 4px;}
