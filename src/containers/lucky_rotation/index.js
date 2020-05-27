@@ -216,8 +216,9 @@ class Lucky_Rotation extends React.Component {
 		var goldTimeEnd=luckySpin.goldTimeEnd;
 		const hh=48*360*1000;
 		var goal_upcoming=(goldTimeStart - time > 0 && goldTimeStart - time < hh) ? true : false;
+		var isGoal=goldTimeEnd - time > 0 ? true :false;
 		
-		if(goldTimeStatus){
+		if(goldTimeStatus && isGoal){
 			this.timeRemain(goldTimeEnd)
 			this.setState({ status_sukien: "Giờ Vàng còn lại", live:true});
 		}else{
