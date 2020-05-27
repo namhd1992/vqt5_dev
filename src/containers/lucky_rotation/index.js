@@ -191,18 +191,22 @@ class Lucky_Rotation extends React.Component {
 
 	getStatus=(luckySpin)=>{
 		var start=luckySpin.startDate;
+		var time=Date.now();
 		var end=luckySpin.endDate;
 		var goldTimeStart=luckySpin.goldTimeStart;
 		var goldTimeEnd=luckySpin.goldTimeEnd;
 		var goldTimeStatus=luckySpin.goldTimeStatus;
 		const hh=48*360*1000;
 		var goal_upcoming=(goldTimeStart - time > 0 && goldTimeStart - time < hh) ? true : false;
-		console.log(goal_upcoming)
-		var time=Date.now();
-		if(goldTimeStatus){
+		var isGoal=time-goldTimeEnd > 0 ? false :true
+		
+		if(goldTimeStatus && isGoal){
 			this.timeRemain(goldTimeEnd)
-			this.setState({ status_sukien: " Giờ Vàng còn lại", live:true});
+			this.setState({ status_sukien: "Giờ Vàng còn lại", live:true});
 		}else{
+			if(goldTimeStatus){
+				this.setState(goldTimeStatus:false)
+			}
 			if(goal_upcoming){
 				this.timeRemain(goldTimeStart)
 				this.setState({ status_sukien: 'Sắp tới giờ vàng.', message_status:"Sắp tới giờ vàng.", start:true});
@@ -219,7 +223,6 @@ class Lucky_Rotation extends React.Component {
 					this.setState({ status_sukien: "Sự kiện đã kết thúc.", message_status:"Sự kiện đã kết thúc.", finish:true});
 				}
 			}
-			
 		}
 	}
 
@@ -425,6 +428,7 @@ class Lucky_Rotation extends React.Component {
 
 	timeRemain=(times)=>{
 		var _this=this;
+		const {luckySpin}=this.state;
 		setInterval(()=>{
 			var time=(times-Date.now())/1000;
 			if(time>0){
@@ -433,6 +437,8 @@ class Lucky_Rotation extends React.Component {
 				var minute=Math.floor(((time%86400)%3600)/60) > 9 ? Math.floor(((time%86400)%3600)/60) : `0${Math.floor(((time%86400)%3600)/60)}`;
 				var second=Math.ceil(((time%86400)%3600)%60) > 9 ? Math.ceil(((time%86400)%3600)%60) : `0${Math.ceil(((time%86400)%3600)%60)}`;
 				_this.setState({day:day, hour: hour, minute: minute, second:second})
+			}else{
+				_this.getStatus(luckySpin)
 			}
 		}, 1000);
 	}
