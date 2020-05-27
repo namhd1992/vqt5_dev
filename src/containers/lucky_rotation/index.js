@@ -139,9 +139,13 @@ class Lucky_Rotation extends React.Component {
 					if(data.status==='01'){
 						var time=Date.now();
 						var goldTimeEnd=data.data.luckySpin.goldTimeEnd;
-						var isGoal=time-goldTimeEnd > 0 ? false :true;
-						this.getStatus(data.data.luckySpin);
-						this.setState({userTurnSpin:data.data.userTurnSpin, user:user, itemOfSpin:data.data.itemOfSpin, luckySpin:data.data.luckySpin, turnsFree:(data.data.userTurnSpin.turnsFree+data.data.userTurnSpin.turnsBuy), turnsBuyInfo:data.data.userTurnSpin.turnsBuyInfo, isLogin:true, goldTimeStatus:isGoal},()=>{
+						var goldTimeStatus=data.data.luckySpin.goldTimeEnd;
+						var isGoal=goldTimeEnd - time > 0 ? true :false;
+						var goal=false;
+						if(goldTimeStatus && isGoal){
+							goal=true;
+						}
+						this.setState({userTurnSpin:data.data.userTurnSpin, user:user, itemOfSpin:data.data.itemOfSpin, luckySpin:data.data.luckySpin, turnsFree:(data.data.userTurnSpin.turnsFree+data.data.userTurnSpin.turnsBuy), turnsBuyInfo:data.data.userTurnSpin.turnsBuyInfo, isLogin:true, goldTimeStatus:goal},()=>{
 							this.getStatus(data.data.luckySpin);
 						})
 					}else{
@@ -161,9 +165,13 @@ class Lucky_Rotation extends React.Component {
 					if(data.status==='01'){
 						var time=Date.now();
 						var goldTimeEnd=data.data.luckySpin.goldTimeEnd;
-						var isGoal=time-goldTimeEnd > 0 ? false :true;
-						
-						this.setState({userTurnSpin:data.data.userTurnSpin, itemOfSpin:data.data.itemOfSpin, luckySpin:data.data.luckySpin, turnsFree:(data.data.userTurnSpin.turnsFree+data.data.userTurnSpin.turnsBuy), isLogin:false, goldTimeStatus:isGoal}, ()=>{
+						var goldTimeStatus=data.data.luckySpin.goldTimeEnd;
+						var isGoal=goldTimeEnd - time > 0 ? true :false;
+						var goal=false;
+						if(goldTimeStatus && isGoal){
+							goal=true;
+						}
+						this.setState({userTurnSpin:data.data.userTurnSpin, itemOfSpin:data.data.itemOfSpin, luckySpin:data.data.luckySpin, turnsFree:(data.data.userTurnSpin.turnsFree+data.data.userTurnSpin.turnsBuy), isLogin:false, goldTimeStatus:goal}, ()=>{
 							this.getStatus(data.data.luckySpin);
 						})
 					}else{
@@ -214,7 +222,9 @@ class Lucky_Rotation extends React.Component {
 			this.setState({ status_sukien: "Giờ Vàng còn lại", live:true});
 		}else{
 			if(goldTimeStatus){
-				this.setState({goldTimeStatus:false})
+				this.setState({goldTimeStatus:false}, ()=>{
+					console.log('AAAAAAAAAAAAA')
+				});
 			}
 			if(goal_upcoming){
 				this.timeRemain(goldTimeStart)
