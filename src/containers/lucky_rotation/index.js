@@ -137,8 +137,13 @@ class Lucky_Rotation extends React.Component {
 				var data=this.props.dataRotationWithUser;
 				if(data!==undefined){
 					if(data.status==='01'){
+						var time=Date.now();
+						var goldTimeEnd=data.data.luckySpin.goldTimeEnd;
+						var isGoal=time-goldTimeEnd > 0 ? false :true;
 						this.getStatus(data.data.luckySpin);
-						this.setState({userTurnSpin:data.data.userTurnSpin, user:user, itemOfSpin:data.data.itemOfSpin, luckySpin:data.data.luckySpin, turnsFree:(data.data.userTurnSpin.turnsFree+data.data.userTurnSpin.turnsBuy), turnsBuyInfo:data.data.userTurnSpin.turnsBuyInfo, isLogin:true, goldTimeStatus:data.data.luckySpin.goldTimeStatus})
+						this.setState({userTurnSpin:data.data.userTurnSpin, user:user, itemOfSpin:data.data.itemOfSpin, luckySpin:data.data.luckySpin, turnsFree:(data.data.userTurnSpin.turnsFree+data.data.userTurnSpin.turnsBuy), turnsBuyInfo:data.data.userTurnSpin.turnsBuyInfo, isLogin:true, goldTimeStatus:isGoal},()=>{
+							this.getStatus(data.data.luckySpin);
+						})
 					}else{
 						$('#myModal11').modal('show');
 						this.setState({message_error:'Không lấy được dữ liệu người dùng. Vui lòng tải lại trang.'})
@@ -154,8 +159,13 @@ class Lucky_Rotation extends React.Component {
 				var data=this.props.dataRotation;
 				if(data!==undefined){
 					if(data.status==='01'){
-						this.getStatus(data.data.luckySpin);
-						this.setState({userTurnSpin:data.data.userTurnSpin, itemOfSpin:data.data.itemOfSpin, luckySpin:data.data.luckySpin, turnsFree:(data.data.userTurnSpin.turnsFree+data.data.userTurnSpin.turnsBuy), isLogin:false, goldTimeStatus:data.data.luckySpin.goldTimeStatus})
+						var time=Date.now();
+						var goldTimeEnd=data.data.luckySpin.goldTimeEnd;
+						var isGoal=time-goldTimeEnd > 0 ? false :true;
+						
+						this.setState({userTurnSpin:data.data.userTurnSpin, itemOfSpin:data.data.itemOfSpin, luckySpin:data.data.luckySpin, turnsFree:(data.data.userTurnSpin.turnsFree+data.data.userTurnSpin.turnsBuy), isLogin:false, goldTimeStatus:isGoal}, ()=>{
+							this.getStatus(data.data.luckySpin);
+						})
 					}else{
 						$('#myModal11').modal('show');
 						this.setState({message_error:'Không lấy được dữ liệu.  Vui lòng tải lại trang.'})
@@ -190,22 +200,21 @@ class Lucky_Rotation extends React.Component {
 	}
 
 	getStatus=(luckySpin)=>{
+		const {goldTimeStatus}=this.state;
 		var start=luckySpin.startDate;
 		var time=Date.now();
 		var end=luckySpin.endDate;
 		var goldTimeStart=luckySpin.goldTimeStart;
 		var goldTimeEnd=luckySpin.goldTimeEnd;
-		var goldTimeStatus=luckySpin.goldTimeStatus;
 		const hh=48*360*1000;
 		var goal_upcoming=(goldTimeStart - time > 0 && goldTimeStart - time < hh) ? true : false;
-		var isGoal=time-goldTimeEnd > 0 ? false :true
 		
-		if(goldTimeStatus && isGoal){
+		if(goldTimeStatus){
 			this.timeRemain(goldTimeEnd)
 			this.setState({ status_sukien: "Giờ Vàng còn lại", live:true});
 		}else{
 			if(goldTimeStatus){
-				this.setState(goldTimeStatus:false)
+				this.setState({goldTimeStatus:false})
 			}
 			if(goal_upcoming){
 				this.timeRemain(goldTimeStart)
