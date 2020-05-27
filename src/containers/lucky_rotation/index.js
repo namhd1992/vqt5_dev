@@ -795,7 +795,7 @@ class Lucky_Rotation extends React.Component {
 					<div class="float-right">
 						<ul class="nav flex-column text-float-right">
 							<li class="mt-3"><a href="#" title="Giải thưởng" data-toggle="modal" data-target="#bgiaithuong" onClick={this.openGiaiThuong}>&nbsp;</a></li>
-							<li class="mt-3"><a href="#" title="Lịch sử" data-toggle="modal" onClick={()=>this.showModalCodeBonus(1)}>&nbsp;</a></li>
+							<li class="mt-3"><a href="#" title="Lịch sử" data-toggle="modal" onClick={()=>this.showModalCodeBonus(1)}>&nbsp;</a>{notification_tudo}</li>
 						</ul>
 					</div>
 				</div>
@@ -1302,7 +1302,7 @@ class Lucky_Rotation extends React.Component {
 					</div>
 						<div className="mt-2 text-center">              
 							<h5 className="text-thele lead text-center">Thông báo bảo trì!</h5>
-							<h5 className="text-thele lead text-center">Hệ thống đang được nâng cấp để tối ưu. Vui lòng quay lại sau 10 phút.</h5>
+							<h5 className="text-thele lead text-center" style={{fontFamily:'roboto'}}>Hệ thống đang được nâng cấp để tối ưu. Vui lòng quay lại sau 10 phút.</h5>
 							<h5 className="text-thele lead text-center">Xin lỗi vì sự bất tiện này</h5>
 							<button type="button" className="btn btn-danger mx-auto text-center my-3" onClick={this.closeServerErr}>Xác nhận</button>
 						</div>       
