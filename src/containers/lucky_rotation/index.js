@@ -1159,7 +1159,7 @@ class Lucky_Rotation extends React.Component {
 					<div class="modal-body pt-0">
 						<p class="text-center mb-1 font14">Bạn vừa tìm được <span class="text-danger">{itemBonus.name}</span> khi mở rương!</p>
 						<p class="text-center font14">(Phần thưởng đã cộng trực tiếp vào ví Scoin.vn)</p>
-						<p class="text-center"><img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="45" /></p>
+						<p class="text-center"><img src={thumb_item_giaithuong} alt="5 triệu Scoin" class="mr-1" width="65" /></p>
 						<p class="text-center font14"><a class="text-dark" href="#" title="Lịch sử">&raquo; Xem lịch sử &laquo;</a></p>
 						<div class="d-flex justify-content-center">
 							<div class="mo-1 pr-1"><a href="#" title="Mở tiếp 1 rương" data-toggle="modal" onClick={this.btnStart}><img class="img-hover" src={btn_mo_tiep1ruong} width="100" alt="Mở tiếp 1 rương" /></a></div>
