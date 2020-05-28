@@ -739,7 +739,7 @@ class Lucky_Rotation extends React.Component {
 
 
 	render() {
-		const {textAuto, goldTimeStatus, soinValue,listCountBonus, listKey, activeKey, turnsBuyInfo,status_sukien, xacthuc, scoinCard,height, width, dialogLoginOpen, dialogBonus, auto, dialogWarning, textWarning, isLogin, userTurnSpin, day, hour, minute, second, code,numberPage, message_status, data_auto,message_error,
+		const {textAuto,type_item, goldTimeStatus, soinValue,listCountBonus, listKey, activeKey, turnsBuyInfo,status_sukien, xacthuc, scoinCard,height, width, dialogLoginOpen, dialogBonus, auto, dialogWarning, textWarning, isLogin, userTurnSpin, day, hour, minute, second, code,numberPage, message_status, data_auto,message_error,
 			activeRuong, activeHistory, activeBonus, activeVinhDanh, limit, countCodeBonus, countRuong, countKey, countVinhDanh, listHistory, listCodeBonus, listRuong, listVinhDanh,itemBonus, turnsFree, noti_mdt, noti_tudo, hour_live, minute_live, second_live, user}=this.state;
 		const { classes } = this.props;
 		const notification_tudo=noti_tudo?(<span className="badge badge-pill badge-danger position-absolute noti-tudo">!</span>):(<span></span>);
@@ -789,7 +789,7 @@ class Lucky_Rotation extends React.Component {
 						<ul class="nav flex-column text-float-left">
 							<li class="mt-5"><a href="https://scoin.vn/nap-game" title="Nạp Game" target="_blank">&nbsp;</a></li>
 							<li class="mt-3"><a href="#" title="Thể lệ" data-toggle="modal" data-target="#thele">&nbsp;</a></li>
-							<li class="mt-3"><a href="#" title="Vinh danh" data-toggle="modal" data-target="#bangvinhdanh" onClick={()=>this.getDataVinhDanh('highlights',1)}>&nbsp;</a></li>
+							<li class="mt-3"><a href="#" title="Vinh danh" data-toggle="modal" data-target="#bangvinhdanh" onClick={()=>this.getDataVinhDanh(type_item,1)}>&nbsp;</a></li>
 						</ul>
 					</div>
 					<div class="float-right">
