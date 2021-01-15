@@ -133,7 +133,7 @@ class Lucky_Rotation extends React.Component {
 	componentDidMount(){
 		var user = JSON.parse(localStorage.getItem("user"));
 		if (user !== null) {
-			this.props.getRotationDetailDataUser(user.access_token, 1).then(()=>{
+			this.props.getRotationDetailDataUser(user.access_token, 119).then(()=>{
 				var data=this.props.dataRotationWithUser;
 				if(data!==undefined){
 					if(data.status==='01'){
@@ -159,7 +159,7 @@ class Lucky_Rotation extends React.Component {
 				
 			});
 		} else {
-			this.props.getRotationDetailData(1).then(()=>{
+			this.props.getRotationDetailData(119).then(()=>{
 				var data=this.props.dataRotation;
 				if(data!==undefined){
 					if(data.status==='01'){
@@ -176,7 +176,7 @@ class Lucky_Rotation extends React.Component {
 						})
 					}else{
 						$('#myModal11').modal('show');
-						this.setState({message_error:'Không lấy được dữ liệu.  Vui lòng tải lại trang.'})
+						this.setState({message_error:'Không lấy được dữ liệu. Vui lòng tải lại trang.'})
 					}
 				}else{
 					// $('#myModal12').modal('show');
@@ -223,9 +223,7 @@ class Lucky_Rotation extends React.Component {
 			this.setState({ status_sukien: "Giờ Vàng còn lại", live:true});
 		}else{
 			if(goldTimeStatus){
-				this.setState({goldTimeStatus:false}, ()=>{
-					console.log('AAAAAAAAAAAAA')
-				});
+				this.setState({goldTimeStatus:false});
 			}
 			if(goal_upcoming){
 				this.timeRemain(goldTimeStart)
@@ -237,7 +235,7 @@ class Lucky_Rotation extends React.Component {
 				}
 				if (time > start && time < end) {
 					this.timeRemain(end)
-					this.setState({ status_sukien: "Sự kiện đang diễn ra còn", live:true});
+					this.setState({ status_sukien: "Sự kiện đang diễn ra", live:true});
 				}
 				if (time > end) {
 					this.setState({ status_sukien: "Sự kiện đã kết thúc.", message_status:"Sự kiện đã kết thúc.", finish:true});
@@ -350,6 +348,7 @@ class Lucky_Rotation extends React.Component {
 
 	btnStart=()=>{
 		const {server_err, start, finish}=this.state;
+		console.log(start)
 		$('#chucmung').modal('hide');
 		$('#ruongrong').modal('hide');
 		if(server_err){
@@ -572,7 +571,7 @@ class Lucky_Rotation extends React.Component {
 
 	getVinhDanh=(pageNumber)=>{
 		const {limit, luckySpin, type_item}=this.state;
-		this.props.getVinhDanh(1, 10, (pageNumber-1), type_item).then(()=>{
+		this.props.getVinhDanh(119, 10, (pageNumber-1), type_item).then(()=>{
 			var data=this.props.dataVinhDanh;
 			if(data!==undefined){
 				
@@ -634,7 +633,6 @@ class Lucky_Rotation extends React.Component {
 				this.setState({message_status:"Sự kiện chưa diễn ra."},()=>{
 					$('#myModal8').modal('show');
 				})
-				
 			}else if(finish){
 				this.setState({message_status:"Sự kiện đã kết thúc."},()=>{
 					$('#myModal8').modal('show');
@@ -748,7 +746,7 @@ class Lucky_Rotation extends React.Component {
 			<div class={goldTimeStatus ? "container-fluid bg-page position-relative" : "container-fluid b-bg-page position-relative"} >
 				<div class="k-fixed-bottom">
 					<div class="k-box-time">
-						<h2 class="text-center text-white font-weight-bold font-italic">{status_sukien}</h2>
+						<h2 class="text-center text-white font-weight-bold font-italic" style={{marginBottom:15}}>{status_sukien}</h2>
 						<table class="table table-borderless k-tbl-boxtime m-0 p-0" align="center">
 						<tr>
 							<td class="k-cell-timer-p1 text-white k-display-5 text-center font-weight-bold p-1 align-middle font-mijasultra">{day}</td>
@@ -773,7 +771,7 @@ class Lucky_Rotation extends React.Component {
 							<p class="font14" style={{textAlign:'center', color:'#fff', marginBottom:5, marginTop:5}}>Chìa khóa còn lại: {turnsFree ? turnsFree.toLocaleString() :0} <img src={key_yellow_icon}  width="20"/></p>
 						</div> 
 						<div class="d-flex justify-content-center">
-							<div class="them-chia-khoa"><a title="Thêm chìa khóa" data-toggle="modal" data-target="#themchiakhoa" onClick={this.openThemLuot}><img class="img-hover" src={btn_them_chiakhoa} width="100" alt="Thêm chìa khóa" /></a></div>
+							<div class="them-chia-khoa"><a title="Thêm chìa khóa" data-toggle="modal" onClick={this.openThemLuot}><img class="img-hover" src={btn_them_chiakhoa} width="100" alt="Thêm chìa khóa" /></a></div>
 						</div>
 						<p class="font12 text-white text-center pt-1">Đang đăng nhập &lt;{this.getUsername(userTurnSpin.currName)}&gt; <a class="text-info" href="#" title="Thoát" onClick={this.logoutAction}>Thoát</a></p>
 						
@@ -978,7 +976,7 @@ class Lucky_Rotation extends React.Component {
 						<dl class="font14">
 							<dt class="pb-1">I. Đối tượng tham gia</dt>
 							<dd class="pl-1" style={{marginLeft:10}}>&bull; Tất cả game thủ có tài khoản Scoin. Nếu chưa có <a href="https://scoin.vn/nap-game" title="Đăng ký" target="_blank">&raquo; Đăng ký tại đây &laquo;</a></dd>
-							<dd class="pl-1"  style={{marginLeft:10}}>&bull; Thời gian SK diễn ra từ 10:00 ngày 19.03 - hết ngày 18.04.2020. Sau khi kết thúc, số chìa khóa sẽ được xóa khỏi hệ thống.</dd>
+							<dd class="pl-1"  style={{marginLeft:10}}>&bull; Thời gian SK diễn ra từ 10:00 ngày 03.06 - hết ngày 02.07.2020. Sau khi kết thúc, số chìa khóa sẽ được xóa khỏi hệ thống.</dd>
 							<dt class="pt-2 pb-1">II. Cách nhận chìa khóa mở rương báu</dt>
 							<dd class="pl-1"  style={{marginLeft:10}}>&bull; Nạp ví Scoin/ thẻ Scoin vào các game do VTC Mobile phát hành.</dd>
 							<dd class="pl-1"  style={{marginLeft:10}}>&bull; Mỗi 1 Scoin bạn nạp vào game từ Thẻ Scoin sẽ nhận được 2 Điểm.</dd>
@@ -988,8 +986,8 @@ class Lucky_Rotation extends React.Component {
 
 						<div class="alert alert-secondary font14 text-center">
 							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
-							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} Scoin</span> từ Thẻ Scoin hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
-							<p class="font-weight-bold font14"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank">Thêm Chìa khóa <img src={key_yellow_icon} width="20" class="img-fluid" /></a></p>
+							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): '50.000'} Scoin</span> từ Thẻ Scoin hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): '100.000'} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
+							<p class="font-weight-bold font14"><a href="https://scoin.vn/nap-game" title="Nạp game" target="_blank">Thêm Chìa khóa <img src={key_yellow_icon} width="20" class="img-fluid" /></a></p>
 						</div>
 						<p class="text-center"><a href="#" title="Nạp game" data-dismiss="modal" data-toggle="modal" data-target="#bgiaithuong" onClick={this.openGiaiThuong}><img src={btn_xem_khobau} width="128" alt="Xem kho báu" /></a></p>
 					</div>
@@ -1016,7 +1014,7 @@ class Lucky_Rotation extends React.Component {
 							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
 							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} Scoin từ Thẻ Scoin</span> hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
 						</div>
-						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank"><img class="img-hover" src={btn_napgame} width="128" alt="Nạp game" /></a></p>
+						<p class="text-center"><a href="https://scoin.vn/nap-game" title="Nạp game" target="_blank"><img class="img-hover" src={btn_napgame} width="128" alt="Nạp game" /></a></p>
 					</div>
 					</div>
 				</div>
@@ -1208,7 +1206,7 @@ class Lucky_Rotation extends React.Component {
 							<p class="font-weight-bold font14 mb-1">Điểm đang có: <span class="text-danger">{turnsBuyInfo.accumulationPoint ? turnsBuyInfo.accumulationPoint.toLocaleString() : 0} Điểm</span></p>
 							<p class="font-weight-bold font14">Cần nạp thêm tối thiểu <span class="text-danger">{turnsBuyInfo.cardBalanceRounding ? turnsBuyInfo.cardBalanceRounding.toLocaleString(): 0} Scoin từ Thẻ Scoin </span> hoặc <span class="text-danger">{turnsBuyInfo.scoinBalanceRounding ? turnsBuyInfo.scoinBalanceRounding.toLocaleString(): 0} Scoin từ ví</span> để nhận 01 Chìa khóa miễn phí!</p>
 						</div>
-						<p class="text-center"><a href="http://sandbox.scoin.vn/nap-vao-game?GameId=330281" title="Nạp game" target="_blank"><img class="img-hover" src={btn_napgame} width="128" alt="Nạp game" /></a></p>
+						<p class="text-center"><a href="https://scoin.vn/nap-game" title="Nạp game" target="_blank"><img class="img-hover" src={btn_napgame} width="128" alt="Nạp game" /></a></p>
 					</div>
 					</div>
 				</div>
@@ -1259,6 +1257,20 @@ class Lucky_Rotation extends React.Component {
 							<p className="text-thele text-center font-iCielPantonBlack" style={{color:'red'}}>Đã dùng hết Chìa khóa</p>
 						)}        
 					</div>
+					</div>
+				</div>
+			</div>
+
+			{/* Thông báo */}
+			<div className="modal fade" id="myModal8">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<div class="modal-header border-bottom-0 pb-0">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+						<div className="table-responsive mt-2 mb-4">              
+							<h5 className="text-thele lead text-center">{message_status}</h5>
+						</div>       
 					</div>
 				</div>
 			</div>
